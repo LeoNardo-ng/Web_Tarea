@@ -23,7 +23,7 @@
       display: flex;
       flex-direction: column;
       /* fondo de imagen */
-      background: url('img/fondo4.jpg') no-repeat center center fixed;
+      background: url('https://www.prexus.co/uploads/1/3/0/6/13063909/sale_orig.jpg') no-repeat center center fixed;
       background-size: cover;
     }
     header {
