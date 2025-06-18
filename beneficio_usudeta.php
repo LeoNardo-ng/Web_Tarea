@@ -9,7 +9,7 @@ $id_cliente = $_SESSION['user_id'];
 
 // Conexión
 $pdo = new PDO(
-    "mysql:host=localhost;dbname=fidelizacion;charset=utf8mb4",
+    "mysql:host=localhost;port=3309;dbname=fidelizacion;charset=utf8mb4",
     "root","", [PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]
 );
 

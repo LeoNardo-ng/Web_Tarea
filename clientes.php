@@ -10,7 +10,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol']!=='admin') {
 }
 
 // Conexión a BD
-$dsn = "mysql:host=localhost;dbname=fidelizacion;charset=utf8mb4";
+$dsn = "mysql:host=localhost;port=3309;dbname=fidelizacion;charset=utf8mb4";
 try {
     $pdo = new PDO($dsn,'root','',[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);
 } catch (PDOException $e) {

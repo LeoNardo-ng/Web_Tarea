@@ -20,21 +20,11 @@ try {
 
 $error = '';
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $telefono           = trim($_POST['telefono']);
-    $password           = trim($_POST['password']);
-    $recaptcha_response = $_POST['g-recaptcha-response'];
-
-    // Verificación de reCAPTCHA
-    $secret = '6LcFLMsqAAAAAMMmKCNOan23g4-5xjADqBnfF2-q';
-    $verify = file_get_contents(
-        "https://www.google.com/recaptcha/api/siteverify?secret={$secret}&response={$recaptcha_response}"
-    );
-    $response_data = json_decode($verify);
+    $telefono = trim($_POST['telefono']);
+    $password = trim($_POST['password']);
 
     if (empty($telefono) || empty($password)) {
         $error = 'Ingresa teléfono y contraseña.';
-    } elseif (! $response_data->success) {
-        $error = 'Error de reCAPTCHA. Inténtalo de nuevo.';
     } else {
         // Intentar login como admin (comparación en texto plano)
         $stmt = $pdo->prepare('SELECT id_admin AS id, nombre, password_hash FROM admin WHERE telefono = ?');
@@ -80,11 +70,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <title>Login - Programa de Fidelización</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         body {
             height: 100vh;
-            background: url('img/fon.jpg') no-repeat center center fixed;
+            background: url('https://latexmagazine.com/wp-content/uploads/2018/02/portada-gucci.jpg') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             align-items: center;
@@ -131,21 +120,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             margin-bottom: 15px;
         }
     </style>
-    <script>
-        function validarFormulario(event) {
-            var response = grecaptcha.getResponse();
-            if (response.length === 0) {
-                event.preventDefault();
-                alert("Por favor, completa el reCAPTCHA antes de continuar.");
-            }
-        }
-        $(document).ready(function(){
-            $("#linkForgot").click(function(){
-                $("#modalEmail").modal("show");
-            });
-            // ... (scripts para recuperación idénticos) ...
-        });
-    </script>
 </head>
 <body>
     <div class="overlay"></div>
@@ -157,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <?php if (!empty($error)): ?>
                         <div class="error-alert"><?= htmlspecialchars($error) ?></div>
                     <?php endif; ?>
-                    <form method="POST" onsubmit="validarFormulario(event)">
+                    <form method="POST">
                         <div class="mb-3">
                             <label>Teléfono</label>
                             <input type="text" name="telefono" class="form-control" pattern="\d{10,15}" title="Sólo números, entre 10 y 15 dígitos" required>
@@ -166,13 +140,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <label>Contraseña</label>
                             <input type="password" name="password" class="form-control" required>
                         </div>
-                        <div class="g-recaptcha mb-3" data-sitekey="6LcFLMsqAAAAAO5WlI_bGH3Dyd-Isf_4Raoh9QPP"></div>
                         <button type="submit" class="btn btn-primary w-100">Ingresar</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
 </body>
 </html>

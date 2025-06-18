@@ -11,7 +11,8 @@ $host = 'localhost';
 $db   = 'fidelizacion';
 $user = 'root';
 $pass = '';
-$dsn  = "mysql:host=$host;dbname=$db;charset=utf8mb4";
+$puerto = '3309';
+$dsn  = "mysql:host=$host;port=$puerto;dbname=$db;charset=utf8mb4";
 $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);
 
 $action = $_GET['action'] ?? 'list';

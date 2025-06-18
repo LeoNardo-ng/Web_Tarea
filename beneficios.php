@@ -9,7 +9,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
 
 // 2) Conexión a BD (poner aquí tu db.php o conexión inline)
 $host='localhost'; $db='fidelizacion'; $user='root'; $pass='';
-$pdo=new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4",$user,$pass,[
+$pdo=new PDO("mysql:host=$host;port=3309;dbname=$db;charset=utf8mb4",$user,$pass,[
     PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION
 ]);
 

@@ -14,7 +14,8 @@ $host = 'localhost';
 $db   = 'fidelizacion';
 $user = 'root';
 $pass = '';
-$pdo  = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass, [
+$puerto = '3309';
+$pdo  = new PDO("mysql:host=$host;dbname=$db;port=$puerto;charset=utf8mb4", $user, $pass, [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 ]);
 

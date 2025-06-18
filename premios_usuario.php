@@ -9,7 +9,7 @@ $id_cliente = $_SESSION['user_id'];
 
 // Conexión
 $pdo = new PDO(
-    "mysql:host=localhost;dbname=fidelizacion;charset=utf8mb4",
+    "mysql:host=localhost;port=3309;dbname=fidelizacion;charset=utf8mb4",
     "root","", [PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]
 );
 
@@ -42,11 +42,12 @@ if ($_SERVER['REQUEST_METHOD']==='POST' && ($_POST['action']??'')==='buy') {
     } else {
         // 2.2) Transacción: insertar redención, actualizar puntos y stock
         $pdo->beginTransaction();
+        $puntos_restantes = $u['puntos_actuales'] - $premio['puntos_requeridos'];
         $inst = $pdo->prepare("
-          INSERT INTO redenciones (id_cliente,id_premio,puntos_usados)
-          VALUES (?,?,?)
+          INSERT INTO redenciones (id_cliente,id_premio,puntos_usados,puntos_restantes)
+          VALUES (?,?,?,?)
         ");
-        $inst->execute([$id_cliente, $id_premio, $premio['puntos_requeridos']]);
+        $inst->execute([$id_cliente, $id_premio, $premio['puntos_requeridos'],$puntos_restantes]);
 
         $upd1 = $pdo->prepare("
           UPDATE clientes
