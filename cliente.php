@@ -96,7 +96,7 @@ $u = $stmt->fetch(PDO::FETCH_ASSOC);
   <title>Mi Cuenta - Fidelización</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { background: #eef2f5; }
+    body { background: wheat; }
     .card-virtual {
       max-width: 350px;
       margin: auto;
@@ -111,6 +111,7 @@ $u = $stmt->fetch(PDO::FETCH_ASSOC);
       font-size: 1.2rem;
       letter-spacing: 2px;
       margin: 1rem 0;
+     
     }
     .section {
       text-align: center;
