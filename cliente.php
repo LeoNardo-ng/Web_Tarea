@@ -96,7 +96,7 @@ $u = $stmt->fetch(PDO::FETCH_ASSOC);
   <title>Mi Cuenta - Fidelización</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { background: wheat; }
+    body { background: white; }
     .card-virtual {
       max-width: 350px;
       margin: auto;
